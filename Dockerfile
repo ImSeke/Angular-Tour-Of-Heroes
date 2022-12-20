@@ -1,9 +1,5 @@
-#stage 1
-FROM node:latest as node
-WORKDIR /app
-COPY . .
-RUN npm install
-RUN npm run build --prod
-#stage 2
-FROM nginx:alpine
-COPY --from=node /app/dist/angular-tour-of-heroes /usr/share/nginx/html
+FROM node:18.12.1 as node
+RUN npm install -g @angular/cli
+
+RUN mkdir /angular-tour-of-heroes
+WORKDIR /angular-tour-of-heroes
